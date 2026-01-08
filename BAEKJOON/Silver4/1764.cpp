@@ -1,42 +1,49 @@
-#include <iostream>	
+#include <iostream>
 #include <set>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
-int main() {
-
+void Init()
+{
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
 	cout.tie(NULL);
+}
+
+int main()
+{
+	Init();
 
 	int n, m;
 	cin >> n >> m;
 
-	set<string> name;
-	set<string> both;
+	set<string> notHear;
+	vector<string> notBoth;
 
 	for (int i = 0; i < n; ++i)
 	{
-		string s;
-		cin >> s;
-		name.insert(s);
+		string name;
+		cin >> name;
+		notHear.insert(name);
 	}
 
 	for (int i = 0; i < m; ++i)
 	{
-		string s;
-		cin >> s;
-		if (name.find(s) != name.end())
-			both.insert(s);
+		string name;
+		cin >> name;
+		if (notHear.count(name) > 0)
+			notBoth.push_back(name);
 	}
 
-	//sort(both.begin(), both.end());
+	sort(notBoth.begin(), notBoth.end());
 
-	cout << both.size() << "\n";
-	for (auto& iter : both)
+	cout << notBoth.size() << "\n";
+
+	for (int i = 0; i < notBoth.size(); ++i)
 	{
-		cout << iter << "\n";
+		cout << notBoth[i] << "\n";
 	}
+
 	return 0;
 }
